@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!--欢迎界面的图片-->
+    <ImageView
+        android:id="@+id/welcome_imageview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/welcome"
+        android:scaleType="centerCrop" />
+
+    <!--欢迎界面的文本-->
+    <TextView
+        android:id="@+id/welcome_textview"
+        android:layout_width="170dp"
+        android:layout_height="wrap_content"
+        android:text="Welcome to you and the application will be improved over time."
+        android:textSize="12sp"
+        android:textAlignment="center"
+        android:layout_marginTop="560dp" />
+
+</RelativeLayout>
