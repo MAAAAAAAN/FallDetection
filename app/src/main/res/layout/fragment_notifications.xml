@@ -1,22 +1,103 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.notifications.NotificationsFragment">
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="61dp"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:paddingTop="17dp"
+            android:paddingLeft="25dp"
+            android:paddingRight="15dp"
+            android:gravity="left"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/isRecord_tv"
+                android:layout_width="260dp"
+                android:layout_height="wrap_content"
+                android:text="开启掉落记录"
+                android:textSize="16sp"/>
+            <Switch
+                android:id="@+id/isRecord_s"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="false"/>
+        </LinearLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/grey"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="61dp"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:paddingTop="17dp"
+            android:paddingLeft="25dp"
+            android:paddingRight="15dp"
+            android:gravity="left"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/agility_tv"
+                android:layout_width="260dp"
+                android:layout_height="wrap_content"
+                android:text="敏捷度"
+                android:textSize="16sp"/>
+            <Spinner
+                android:id="@+id/agility_s"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:spinnerMode="dialog" />
+        </LinearLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/grey"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="61dp"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:paddingTop="8dp"
+            android:paddingLeft="25dp"
+            android:paddingRight="15dp"
+            android:gravity="left"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/about_tv"
+                android:layout_width="260dp"
+                android:layout_height="wrap_content"
+                android:text="关于"
+                android:textSize="16sp"
+                android:paddingTop="9dp"/>
+            <ImageButton
+                android:id="@+id/about_b"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/todetail02"
+                android:background="@color/white"/>
+        </LinearLayout>
+    </LinearLayout>
 
     <TextView
         android:id="@+id/text_notifications"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:text="version 1.0.2"
+        android:gravity="center"
+        android:layout_marginTop="240dp"/>
+
+</LinearLayout>

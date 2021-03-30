@@ -10,9 +10,17 @@ import android.os.Bundle;
 import android.text.Html;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.falldetection.ui.notifications.NotificationsFragment;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.LinkedList;
 
 public class CoreActivity extends AppCompatActivity {
 
@@ -20,6 +28,11 @@ public class CoreActivity extends AppCompatActivity {
     private ImageView stateImage;
     private TextView data;
     private Button back;
+    //全局变量
+    public static LinkedList<RecordData> recordData = new LinkedList<RecordData>();
+//    //保存掉落数据在本地
+//    DataStorage dataStorage = new DataStorage(getApplicationContext());
+    private boolean isRecord = NotificationsFragment.recordSetting;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +57,7 @@ public class CoreActivity extends AppCompatActivity {
                 finish();
             }
         });
+
     }
 
     private SensorEventListener sensorEventListener = new SensorEventListener() {
@@ -74,7 +88,7 @@ public class CoreActivity extends AppCompatActivity {
             //跌落检测
             double force;
             force = Math.sqrt(linear_acceleration[0]*linear_acceleration[0] + linear_acceleration[1]*linear_acceleration[1] + linear_acceleration[2]*linear_acceleration[2]);
-            if(force < 1){
+            if(force < 2){
                 stateImage.setImageResource(R.drawable.fall06);
                 data.setText(
                         Html.fromHtml(
@@ -83,6 +97,9 @@ public class CoreActivity extends AppCompatActivity {
                                 +"</font>"
                         )
                 );
+                //获取时间戳并转化为指定格式的字符串
+                SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd  HH:mm:ss");
+                String time = df.format(new Date().getTime());
                 //设置自定义对话框
                 CustomDialog customDialog = new CustomDialog(CoreActivity.this, R.style.CustomDialog);
                 customDialog.setTitle("提示").setMessage("已监测到您的手机处于坠落状态，请检查手机是否损坏！")
@@ -91,13 +108,23 @@ public class CoreActivity extends AppCompatActivity {
                     @Override
                     public void onCancel(CustomDialog dialog)
                     {
-                        Toast.makeText(CoreActivity.this, "可在“记录”中查看本次监测！", Toast.LENGTH_LONG).show();
+                        if(isRecord){
+                            recordData.add(new RecordData(R.drawable.false02, time, R.drawable.todetail02));
+//                        dataStorage.value = time + "false";
+//                        dataStorage.save();
+                            Toast.makeText(CoreActivity.this, "可在“记录”中查看本次监测！", Toast.LENGTH_LONG).show();
+                        }
                     }
                 }).setConfirm("确认", new CustomDialog.IonConfirmListener() {
                     @Override
                     public void onConfirm(CustomDialog dialog)
                     {
-                        Toast.makeText(CoreActivity.this, "可在“记录”中查看本次监测！", Toast.LENGTH_LONG).show();
+                        if(isRecord){
+                            recordData.add(new RecordData(R.drawable.true02, time, R.drawable.todetail02));
+//                        dataStorage.value = time + "true";
+//                        dataStorage.save();
+                            Toast.makeText(CoreActivity.this, "可在“记录”中查看本次监测！", Toast.LENGTH_LONG).show();
+                        }
                     }
                 }).show();
 

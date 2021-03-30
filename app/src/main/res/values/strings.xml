@@ -3,4 +3,6 @@
     <string name="title_home">监测</string>
     <string name="title_dashboard">记录</string>
     <string name="title_notifications">设置</string>
+
+    <string name="spinner_prompt">敏捷度</string>
 </resources>
