@@ -91,13 +91,13 @@ public class ListAdapter extends BaseAdapter
     }
 
 
-    public void add(RecordData data){
-        if(data == null){
-            recordData = new LinkedList<>();
-        }
-        recordData.add(data);
-        notifyDataSetChanged();
-    }
+//    public void add(RecordData data){
+//        if(data == null){
+//            recordData = new LinkedList<>();
+//        }
+//        recordData.addFirst(data);
+//        notifyDataSetChanged();
+//    }
 
 
 }

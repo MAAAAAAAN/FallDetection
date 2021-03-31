@@ -109,7 +109,7 @@ public class CoreActivity extends AppCompatActivity {
                     public void onCancel(CustomDialog dialog)
                     {
                         if(isRecord){
-                            recordData.add(new RecordData(R.drawable.false02, time, R.drawable.todetail02));
+                            recordData.addFirst(new RecordData(R.drawable.false02, time, R.drawable.todetail02));
 //                        dataStorage.value = time + "false";
 //                        dataStorage.save();
                             Toast.makeText(CoreActivity.this, "可在“记录”中查看本次监测！", Toast.LENGTH_LONG).show();
@@ -120,7 +120,7 @@ public class CoreActivity extends AppCompatActivity {
                     public void onConfirm(CustomDialog dialog)
                     {
                         if(isRecord){
-                            recordData.add(new RecordData(R.drawable.true02, time, R.drawable.todetail02));
+                            recordData.addFirst(new RecordData(R.drawable.true02, time, R.drawable.todetail02));
 //                        dataStorage.value = time + "true";
 //                        dataStorage.save();
                             Toast.makeText(CoreActivity.this, "可在“记录”中查看本次监测！", Toast.LENGTH_LONG).show();

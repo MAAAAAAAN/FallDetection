@@ -44,7 +44,7 @@ public class NotificationsFragment extends Fragment {
 
     SharedPreferences preferences;
     private Switch onOff;
-    public static boolean recordSetting = false;
+    public static boolean recordSetting;
 
     private ImageButton about;
     private TextView textView;
@@ -73,7 +73,8 @@ public class NotificationsFragment extends Fragment {
         onOff = getActivity().findViewById(R.id.isRecord_s);
         preferences = getContext().getSharedPreferences("switch", Context.MODE_PRIVATE);
         if(preferences != null){
-            boolean bool = preferences.getBoolean("recordSetting", recordSetting);
+            boolean bool = preferences.getBoolean("recordSetting", true);
+            recordSetting = bool;
             onOff.setChecked(bool);
         }
         onOff.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
