@@ -96,8 +96,6 @@ public class NotificationsFragment extends Fragment {
             }
         });
 
-        //敏捷度
-
 
         //关于
         about = getActivity().findViewById(R.id.about_b);
