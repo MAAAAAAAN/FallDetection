@@ -63,7 +63,7 @@ public class CoreActivity extends AppCompatActivity {
     private SensorEventListener sensorEventListener = new SensorEventListener() {
         @Override
         public void onSensorChanged(SensorEvent event) {
-            if(isFallOrCollision(event)){
+            if(isFallOrCollision(event, 0.8f, 1.5f)){
                 stateImage.setImageResource(R.drawable.fall06);
                 data.setText(
                         Html.fromHtml(
@@ -155,33 +155,34 @@ public class CoreActivity extends AppCompatActivity {
     }
 
 
-
-    public boolean isFallOrCollision(SensorEvent event){
-        // In this example, alpha is calculated as t / (t + dT),
-        // where t is the low-pass filter's time-constant and
-        // dT is the event delivery rate.
-        //在这个例子中，计算为 t / (t + dT)，
-        //其中t是低通滤波器的时间常数和
-        // dT为事件传递速率。
-        final float alpha = 0.8f;
-        // Isolate the force of gravity with the low-pass filter.
-        //用low-pass过滤器隔离重力。
+    /**
+     * 利用加速度传感器监测设备坠落或碰撞，返回布尔值
+     * @param event SensorEvent,
+     * @param alpha float, 过滤器常数（0<alpha<1）
+     * @param sensitivity float, 监测的灵敏度（推荐设置为1.0f<sensitivity<2.0f）
+     * @return boolean, 若监测到设备坠落或碰撞返回true，反之返回false
+     */
+    public boolean isFallOrCollision(SensorEvent event, float alpha, float sensitivity){
         float gravity[] = new float[3];
         float linear_acceleration[] = new float[3];
+
+        //用low-pass滤波器隔离重力
         gravity[0] = alpha * gravity[0] + (1 - alpha) * event.values[0];
         gravity[1] = alpha * gravity[1] + (1 - alpha) * event.values[1];
         gravity[2] = alpha * gravity[2] + (1 - alpha) * event.values[2];
-        // Remove the gravity contribution with the high-pass filter.
-        //用高通滤波器移除重力。
+
+        //用high-pass滤波器移除重力
         linear_acceleration[0] = event.values[0] - gravity[0];
         linear_acceleration[1] = event.values[1] - gravity[1];
         linear_acceleration[2] = event.values[2] - gravity[2];
+
         //跌落检测
         double force;
         force = Math.sqrt(linear_acceleration[0]*linear_acceleration[0] + linear_acceleration[1]*linear_acceleration[1] + linear_acceleration[2]*linear_acceleration[2]);
-        if(force < 1){
+        if(force < sensitivity){
             return true;
         }
+
         return false;
     }
 
